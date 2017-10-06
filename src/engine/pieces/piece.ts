@@ -16,6 +16,13 @@ export default class Piece {
         return true;
     }
 
+    protected checkPieceOnSpot(square: Square, board:Board): boolean {
+        if (board.getPiece(square) === undefined) {
+            return false;
+        }
+        return true;
+    }
+
     public getAvailableMoves(board: Board) {
         throw new Error('This method must be implemented, and return a list of available moves');
     }

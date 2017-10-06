@@ -9,12 +9,12 @@ export default class King extends Piece {
     }
 
     private addMovesAroundPiece(moves: Array<Square>, currentSquare : Square) {
-        for (let currentRow = -1; currentRow < 2; currentRow++) {
-            for (let currentCol = -1; currentCol < 2; currentCol++) {
-                if (currentRow + currentCol === 0 && currentCol === currentRow) {
+        for (let rowDelta = -1; rowDelta < 2; rowDelta++) {
+            for (let colDelta = -1; colDelta < 2; colDelta++) {
+                if (colDelta + rowDelta === 0 && colDelta === rowDelta) {
                     continue;
                 }
-                moves.push(new Square(currentSquare.row + currentRow, currentSquare.col + currentCol));
+                moves.push(new Square(currentSquare.row + rowDelta, currentSquare.col + colDelta));
             }
         }
     }

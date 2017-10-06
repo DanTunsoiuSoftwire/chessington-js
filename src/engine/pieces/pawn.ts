@@ -21,9 +21,18 @@ export default class Pawn extends Piece {
         let moves : Array<Square> = [];
         let currentSquare : Square = board.findPiece(this);
 
-        moves.push(new Square(currentSquare.row + this.direction, currentSquare.col));
+        let squareToAdd: Square = new Square(currentSquare.row + this.direction, currentSquare.col);
+        if (this.checkPieceOnSpot(squareToAdd, board)) {
+            return moves;
+        }
+        moves.push(squareToAdd);
+
         if (!this.moved) {
-            moves.push(new Square(currentSquare.row + 2 * this.direction, currentSquare.col));
+            squareToAdd = new Square(currentSquare.row + 2 * this.direction, currentSquare.col)
+            if (this.checkPieceOnSpot(squareToAdd, board)) {
+                return moves;
+            }
+            moves.push(squareToAdd);
         }
 
         return moves;
