@@ -17,23 +17,23 @@ export default class Pawn extends Piece {
         }
     }
 
+    private addPossibleMoveAbove(currentSquare: Square, moves: Array<Square>) {
+        let squareToAdd: Square = new Square(currentSquare.row + this.direction, currentSquare.col);
+        if (!this.checkInBoardLimits(squareToAdd) || this.checkPieceOnSpot(squareToAdd)) {
+            return;
+        }
+        moves.push(squareToAdd);
+    }
+
     public getAvailableMoves(board: Board) : Array<Square> {
         let moves : Array<Square> = [];
         let currentSquare : Square = board.findPiece(this);
         this.board = board;
 
-        let squareToAdd: Square = new Square(currentSquare.row + this.direction, currentSquare.col);
-        if (this.checkPieceOnSpot(squareToAdd)) {
-            return moves;
-        }
-        moves.push(squareToAdd);
+        this.addPossibleMoveAbove(currentSquare, moves);
 
-        if (!this.moved) {
-            squareToAdd = new Square(currentSquare.row + 2 * this.direction, currentSquare.col)
-            if (this.checkPieceOnSpot(squareToAdd)) {
-                return moves;
-            }
-            moves.push(squareToAdd);
+        if (!this.moved && moves.length > 0) {
+            this.addPossibleMoveAbove(moves[0], moves);
         }
 
         return moves;

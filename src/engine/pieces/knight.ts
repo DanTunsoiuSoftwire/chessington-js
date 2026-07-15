@@ -14,7 +14,11 @@ export default class Knight extends Piece {
                 if (colDelta === rowDelta || colDelta * rowDelta === 0 || colDelta === -rowDelta) {
                     continue;
                 }
-                moves.push(new Square(currentSquare.row + rowDelta, currentSquare.col + colDelta));
+                let squareToAdd = new Square(currentSquare.row + rowDelta, currentSquare.col + colDelta);
+                if (!this.checkInBoardLimits(squareToAdd)) {
+                    continue;
+                }
+                moves.push(squareToAdd);
             }
         }
     }
