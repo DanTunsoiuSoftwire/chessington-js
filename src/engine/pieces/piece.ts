@@ -4,11 +4,9 @@ import Square from '../square';
 
 export default class Piece {
     public player: Player;
-    protected moved:boolean;
 
     public constructor(player: Player) {
         this.player = player;
-        this.moved = false;
     }
 
     protected addFirstDiagonalPossibleMoves(moves: Array<Square>, currentSquare: Square) {
@@ -79,6 +77,5 @@ export default class Piece {
     public moveTo(board: Board, newSquare: Square) {
         const currentSquare = board.findPiece(this);
         board.movePiece(currentSquare, newSquare);
-        this.moved = true;
     }
 }
