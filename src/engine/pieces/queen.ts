@@ -12,6 +12,7 @@ export default class Queen extends LineMovable {
     public getAvailableMoves(board: Board) : Array<Square> {
         let moves: Array<Square> = new Array<Square>();
         let currentSquare: Square = board.findPiece(this);
+        this.board = board;
 
         this.addPossibleMovesRow(currentSquare, moves);
         this.addPossibleMovesColumn(currentSquare, moves);

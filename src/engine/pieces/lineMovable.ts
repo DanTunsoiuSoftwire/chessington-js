@@ -13,6 +13,9 @@ export default class LineMovable extends Piece {
              rowDelta += currentDirection.row, colDelta += currentDirection.col,
                  currentPossibleSquare = new Square(currentSquare.row + rowDelta, currentSquare.col + colDelta)) {
 
+            if (this.checkPieceOnSpot(currentPossibleSquare)) {
+                return;
+            }
             moves.push(currentPossibleSquare);
         }
     }

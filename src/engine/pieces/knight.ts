@@ -22,6 +22,7 @@ export default class Knight extends Piece {
     public getAvailableMoves(board: Board) : Array<Square> {
         let moves : Array<Square> = [];
         let currentSquare : Square = board.findPiece(this);
+        this.board = board;
 
         this.addLshapePossibleMoves(moves, currentSquare);
 

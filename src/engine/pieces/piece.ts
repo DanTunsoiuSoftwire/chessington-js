@@ -4,6 +4,7 @@ import Square from '../square';
 
 export default class Piece {
     public player: Player;
+    public board: Board = new Board();
 
     public constructor(player: Player) {
         this.player = player;
@@ -16,8 +17,8 @@ export default class Piece {
         return true;
     }
 
-    protected checkPieceOnSpot(square: Square, board:Board): boolean {
-        if (board.getPiece(square) === undefined) {
+    protected checkPieceOnSpot(square: Square): boolean {
+        if (this.board.getPiece(square) === undefined) {
             return false;
         }
         return true;
