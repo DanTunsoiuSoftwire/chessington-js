@@ -2,8 +2,9 @@ import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
 import Square from "../square";
+import LineMovable from "./lineMovable";
 
-export default class Queen extends Piece {
+export default class Queen extends LineMovable {
     public constructor(player: Player) {
         super(player);
     }
@@ -12,10 +13,10 @@ export default class Queen extends Piece {
         let moves: Array<Square> = new Array<Square>();
         let currentSquare: Square = board.findPiece(this);
 
-        this.addRowsPossibleMoves(currentSquare, moves);
-        this.addColumnsPossibleMoves(currentSquare, moves);
-        this.addFirstDiagonalPossibleMoves(moves, currentSquare);
-        this.addSecondDiagonalPossibleMoves(moves, currentSquare);
+        this.addPossibleMovesRow(currentSquare, moves);
+        this.addPossibleMovesColumn(currentSquare, moves);
+        this.addPossibleMovesFirstDiagonal(currentSquare, moves);
+        this.addPossibleMovesSecondDiagonal(currentSquare, moves);
 
         return moves;
     }
