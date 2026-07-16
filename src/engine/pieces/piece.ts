@@ -4,9 +4,24 @@ import Square from '../square';
 
 export default class Piece {
     public player: Player;
+    public board: Board = new Board();
 
     public constructor(player: Player) {
         this.player = player;
+    }
+
+    protected checkInBoardLimits(square: Square) {
+        if (square.row < 0 || square.row > 7 || square.col < 0 || square.col > 7) {
+            return false;
+        }
+        return true;
+    }
+
+    protected checkPieceOnSpot(square: Square): boolean {
+        if (this.board.getPiece(square) === undefined) {
+            return false;
+        }
+        return true;
     }
 
     public getAvailableMoves(board: Board) {
