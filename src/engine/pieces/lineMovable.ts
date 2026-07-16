@@ -7,16 +7,19 @@ import Directions from "../directions";
 export default class LineMovable extends Piece {
 
     protected addPossibleMovesInLine(moves: Array<Square>, currentSquare: Square, currentDirection: Directions) {
-        for (let rowDelta = currentDirection.row, colDelta = currentDirection.col,
-                 currentPossibleSquare = new Square(currentSquare.row + rowDelta, currentSquare.col + colDelta);
-             this.checkInBoardLimits(currentPossibleSquare);
-             rowDelta += currentDirection.row, colDelta += currentDirection.col,
-                 currentPossibleSquare = new Square(currentSquare.row + rowDelta, currentSquare.col + colDelta)) {
+        let rowDelta = currentDirection.row, colDelta = currentDirection.col;
 
-            if (this.checkPieceOnSpot(currentPossibleSquare)) {
+        while (true) {
+            let currentPossibleSquare = new Square(currentSquare.row + rowDelta, currentSquare.col + colDelta);
+
+            if (!this.checkInBoardLimits(currentPossibleSquare) || this.checkPieceOnSpot(currentPossibleSquare)) {
                 return;
             }
+
             moves.push(currentPossibleSquare);
+
+            rowDelta += currentDirection.row;
+            colDelta += currentDirection.col;
         }
     }
 
